@@ -1,4 +1,8 @@
-; Convenience copy of programs/fibonacci.asm.
+; Prints the first ten Fibonacci numbers through the numeric console port.
+; R0 = current value
+; R1 = next value
+; R2 = remaining count
+; R3 = temporary sum
 
 .text
     LDI R0, 0
