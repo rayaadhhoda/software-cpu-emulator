@@ -1,4 +1,8 @@
+Instructions format
+OPERATION destination, source1, source2
+
 NOP
+MOV
 LDI
 LDR
 STR

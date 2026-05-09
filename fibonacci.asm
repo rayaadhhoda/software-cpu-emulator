@@ -2,13 +2,12 @@
 
 .text
     LDI %a, #0
-
 LOOP:
     PUSH %a
     CALL factorial
     POP %a
     LDI %b, #12288
-    STR %a, %b[0]
+    STR %a, %b [0]
     ADDI %a, #1
     BNE %a, #12, LOOP
     EXIT
@@ -28,4 +27,3 @@ factorial:
 RETURN:
     POP %ra
     RET
-    
