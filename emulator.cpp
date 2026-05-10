@@ -19,6 +19,7 @@ int main(int argc, char*argv[]){
         return 0;
     }
     
+    //avengers...
     int lineNum = assemble(argv[1],instructions,INSTR_MEM_SIZE,labelLineNum);
 
     simulate(instructions,lineNum);
