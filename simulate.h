@@ -3,6 +3,6 @@
 #include <string>
 #include <unordered_map>
 #include "dataFormat.h"
-void simulate(Data*,int);
+void simulate(Data*,int,bool);
 
 #endif

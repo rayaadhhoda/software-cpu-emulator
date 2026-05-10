@@ -18,10 +18,14 @@ int main(int argc, char*argv[]){
         std::cout<<"please specify a filename"<<std::endl;
         return 0;
     }
+    bool verbose=false;
+    if(argc==3){
+        verbose=true;
+    }
     
     //avengers...
     int lineNum = assemble(argv[1],instructions,INSTR_MEM_SIZE,labelLineNum);
 
-    simulate(instructions,lineNum);
+    simulate(instructions,lineNum,verbose);
     return 0;
 }

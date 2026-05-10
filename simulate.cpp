@@ -1,14 +1,8 @@
 #include "simulate.h"
 #include "assembler.h"
 #include <iostream>
-
-void simulate(Data *instructions, int numInstr){
-    /*
-    std::cout<<"HERE ARE THE INSTRUCTIONS LINECOUNT: "<< numInstr <<std::endl;
-    for(int i=0;i<numInstr;i++){
-        std::cout<<"line "<< i << ": "<< instructions[i].instruction.opcode<<std::endl;
-    }
-    */
+#include <bitset>
+void simulate(Data *instructions, int numInstr, bool verbose){
     Data mem[1024];
     for(int i=0;i<1024;i++){
         mem[i].integer=0;
@@ -32,10 +26,17 @@ void simulate(Data *instructions, int numInstr){
         }
     }cpu;
     std::string discard;
+    int cycleNum=0;
     while(true){
         //fetch
         Data currentInstruction = instructions[cpu.pc];
+        if(verbose){
+            std::cout<<"Cycle "<<cycleNum<<": Fetch Program Counter "<<cpu.pc<<" as "<<std::bitset<32>(currentInstruction.integer)<<std::endl;
+            std::cout<<"Executing Opcode "<<currentInstruction.instruction.opcode<<std::endl;
+        }
+        
         cpu.pc++;
+        
         //std::cout<<"opcode: "<< currentInstruction.instruction.opcode<<std::endl;
         //switch decodes opcode and then executes inside case
         switch(currentInstruction.instruction.opcode){
@@ -48,6 +49,7 @@ void simulate(Data *instructions, int numInstr){
                 //std::cin>>discard;
                 break;
             case ADDI:
+                
                 cpu.gpReg[currentInstruction.instruction.dest].integer+=currentInstruction.instruction.immediate;
                 break;
             case SUBI:
@@ -77,6 +79,9 @@ void simulate(Data *instructions, int numInstr){
                 break;
 
             case STR:
+                if(verbose){
+                    std::cout<<"Storing to address "<<currentInstruction.instruction.immediate<<std::endl;
+                }
                 //store to this address to output a register as an unsigned immediate
                 if(cpu.gpReg[currentInstruction.instruction.source].integer+currentInstruction.instruction.immediate==12288){
                     std::cout<<cpu.gpReg[currentInstruction.instruction.dest].integer<<std::endl;
@@ -130,6 +135,7 @@ void simulate(Data *instructions, int numInstr){
                 return;
                 break;
         }
+        cycleNum++;
     }
     return;
 }
