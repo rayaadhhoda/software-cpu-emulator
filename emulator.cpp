@@ -8,14 +8,14 @@
 #include "assembler.h"
 #include "simulate.h"
 
-int main(){
+int main(int argc, char*argv[]){
 
     const int INSTR_MEM_SIZE=1024;
     std::unordered_map<std::string, int> labelLineNum;
     Data instructions[INSTR_MEM_SIZE];
-    int lineNum = assemble("fibonacci.asm",instructions,INSTR_MEM_SIZE,labelLineNum);
+
+    int lineNum = assemble("hello.asm",instructions,INSTR_MEM_SIZE,labelLineNum);
 
     simulate(instructions,lineNum);
-    return 0;    
-    
+    return 0;
 }

@@ -4,8 +4,6 @@
 #include <fstream>
 #include <iostream>
 
-
-
 enum STATE{
     GLOBAL,
     TEXT,
@@ -65,9 +63,9 @@ Data encodeInstruction(std::string line, std::unordered_map<std::string, int>& l
     return instr;
 }
 
-void populateLabels(std::unordered_map<std::string, int>& labelLineNum){
+void populateLabels(std::string filename, std::unordered_map<std::string, int>& labelLineNum){
     std::string word, line;
-    std::ifstream assemblyInput("fibonacci.asm");
+    std::ifstream assemblyInput(filename);
     STATE state;
     int lineNum=0;
 
@@ -108,9 +106,9 @@ void populateLabels(std::unordered_map<std::string, int>& labelLineNum){
 }
 
 int assemble(std::string filename,Data *instructions,int size,std::unordered_map<std::string, int> &labelLineNum){
-    populateLabels(labelLineNum);
+    populateLabels(filename, labelLineNum);
     std::string word, line;
-    std::ifstream assemblyInput("fibonacci.asm");
+    std::ifstream assemblyInput(filename);
     STATE state;
     
     int lineNum=0;
