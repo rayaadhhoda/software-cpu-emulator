@@ -671,7 +671,8 @@ cmake --build .
 Or directly with g++:
 
 ```bash
-g++ -std=c++17 -Iinclude src/*.cpp -o software_cpu
+g++ -std=c++17 emulator.cpp isa.cpp assembler.cpp cpu.cpp -o software_cpu.exe
+./software_cpu.exe
 ```
 
 ## Suggested Implementation Plan
