@@ -80,7 +80,7 @@ void simulate(Data *instructions, int numInstr, bool verbose){
 
             case STR:
                 if(verbose){
-                    std::cout<<"Storing to address "<<currentInstruction.instruction.immediate<<std::endl;
+                    std::cout<<"Storing to address "<<cpu.gpReg[currentInstruction.instruction.source].integer+currentInstruction.instruction.immediate<<std::endl;
                 }
                 //store to this address to output a register as an unsigned immediate
                 if(cpu.gpReg[currentInstruction.instruction.source].integer+currentInstruction.instruction.immediate==12288){
