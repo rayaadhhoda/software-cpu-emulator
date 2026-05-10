@@ -7,6 +7,7 @@
 #include "opcodes.h"
 #include "assembler.h"
 #include "simulate.h"
+#include <fstream>
 
 int main(int argc, char*argv[]){
 
@@ -25,6 +26,16 @@ int main(int argc, char*argv[]){
     
     //avengers...
     int lineNum = assemble(argv[1],instructions,INSTR_MEM_SIZE,labelLineNum);
+
+
+    std::ofstream out("assembled.txt");
+
+    for (int i = 0; i < lineNum; i++) {
+        //i love c++ i love c++ i love c++
+        out << std::bitset<32>(instructions[i].integer) << '\n';
+    }
+
+    out.close();
 
     simulate(instructions,lineNum,verbose);
     return 0;
