@@ -5,7 +5,7 @@
 LOOP:
     PUSH %a
     CALL factorial
-    LDI %b, #12288
+    LDI %b, #12289
     STR %a, %b [0]
     POP %a
     ADDI %a, #1
