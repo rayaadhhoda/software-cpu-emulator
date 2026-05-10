@@ -81,6 +81,9 @@ void simulate(Data *instructions, int numInstr){
                 if(cpu.gpReg[currentInstruction.instruction.source].integer+currentInstruction.instruction.immediate==12288){
                     std::cout<<cpu.gpReg[currentInstruction.instruction.dest].integer<<std::endl;
                 }
+                else if(cpu.gpReg[currentInstruction.instruction.source].integer+currentInstruction.instruction.immediate==12289){
+                    std::cout<<cpu.gpReg[currentInstruction.instruction.dest].character;
+                }
                 //TODO: add character output
                 //TODO: add memory write for variables
                 break;

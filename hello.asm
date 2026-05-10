@@ -1,7 +1,7 @@
 .global
 
 .text
-LDI %b, #12288
+LDI %b, #12289
 
 LDI %a, #72
 STR %a, %b [0]
@@ -40,6 +40,9 @@ LDI %a, #100
 STR %a, %b [0]
 
 LDI %a, #33
+STR %a, %b [0]
+
+LDI %a, #10
 STR %a, %b [0]
 
 EXIT

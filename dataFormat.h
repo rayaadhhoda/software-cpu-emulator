@@ -10,5 +10,6 @@ union Data{
         OPCODE opcode:5;
     }instruction;
     unsigned int integer;
+    char character;
 };
 #endif
