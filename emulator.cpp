@@ -14,7 +14,12 @@ int main(int argc, char*argv[]){
     std::unordered_map<std::string, int> labelLineNum;
     Data instructions[INSTR_MEM_SIZE];
 
-    int lineNum = assemble("hello.asm",instructions,INSTR_MEM_SIZE,labelLineNum);
+    if(argc<2){
+        std::cout<<"please specify a filename"<<std::endl;
+        return 0;
+    }
+    
+    int lineNum = assemble(argv[1],instructions,INSTR_MEM_SIZE,labelLineNum);
 
     simulate(instructions,lineNum);
     return 0;
