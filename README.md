@@ -5,6 +5,43 @@ assembly source files directly. The executable reads a `.asm` file, encodes the
 instructions into an in-memory instruction array, and simulates them with a
 simple fetch/decode/execute loop.
 
+## CPU Schematic
+
+```mermaid
+flowchart LR
+    ASM["Assembly program<br/>(hello.asm, fibonacci.asm, timer.asm)"]
+    ASSEMBLER["Assembler<br/>parse labels + encode instructions"]
+    IMEM["Instruction memory<br/>Data instructions[1024]"]
+
+    subgraph CPU["Simulated CPU"]
+        PC["Program Counter<br/>pc"]
+        FETCH["Fetch"]
+        DECODE["Decode opcode<br/>and operands"]
+        REGS["Registers<br/>%a, %b, %sp, %ra"]
+        ALU["Execute / ALU<br/>ADD, ADDI, SUBI, SLT, MOV"]
+        CTRL["Control flow<br/>BZ, BNZ, CALL, RET, EXIT"]
+    end
+
+    STACK["Stack/Data memory<br/>Data mem[1024]"]
+    IO["Memory-mapped output<br/>12288 = integer<br/>12289 = character"]
+    CONSOLE["Console output"]
+
+    ASM --> ASSEMBLER --> IMEM --> FETCH
+    PC --> FETCH --> DECODE
+    DECODE --> REGS
+    DECODE --> ALU
+    DECODE --> CTRL
+    REGS <--> ALU
+    REGS <--> STACK
+    CTRL --> PC
+    ALU --> PC
+    REGS --> IO --> CONSOLE
+```
+
+The CPU repeatedly fetches the instruction at `pc`, decodes it, executes the
+matching simulator case, and then either advances `pc` or updates it through a
+branch, call, or return.
+
 ## Files
 
 - `emulator.cpp` - command-line entry point.
