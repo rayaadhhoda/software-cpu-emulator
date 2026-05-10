@@ -5,22 +5,25 @@
 LOOP:
     PUSH %a
     CALL factorial
-    POP %a
     LDI %b, #12288
     STR %a, %b [0]
+    POP %a
     ADDI %a, #1
-    BNE %a, #12, LOOP
+    SLT %b, %a, #12
+    BNZ %b, LOOP
     EXIT
 
 factorial:
     PUSH %ra
-    SLT %a, %a, #2
-    BEQ RETURN
+    SLT %b, %a, #2
+    BNZ %b, RETURN
     PUSH %a
+    SUBI %a, #1
     CALL factorial
     POP %b
     PUSH %a
     MOV %a, %b
+    SUBI %a, #2
     CALL factorial
     POP %b
     ADD %a, %b
